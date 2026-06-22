@@ -1,0 +1,356 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --green: #1a7a4a;
+  --green-dark: #155f3a;
+  --green-pale: #eaf5ee;
+  --green-border: #b6dfc6;
+  --gold: #e6a817;
+  --dark: #0d0d0d;
+  --text: #1a1a1a;
+  --muted: #555;
+  --border: #e0e0e0;
+  --bg: #ffffff;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════
+   NAVBAR
+═══════════════════════════════ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 64px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--green);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-icon svg { width: 20px; height: 20px; fill: #fff; }
+.logo-text { font-size: 18px; font-weight: 700; color: var(--dark); letter-spacing: -.3px; }
+.logo-text span { color: var(--green); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.nav-links a {
+  font-size: 14px;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--green); }
+
+.nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+.btn-signin {
+  padding: 8px 22px;
+  border-radius: 22px;
+  border: 2px solid var(--dark);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.btn-signin:hover { background: var(--dark); color: #fff; }
+
+.btn-get-started {
+  padding: 8px 22px;
+  border-radius: 22px;
+  border: none;
+  background: var(--gold);
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.btn-get-started:hover { opacity: .88; }
+
+.btn-theme {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--dark);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s;
+}
+.btn-theme svg { width: 16px; height: 16px; fill: #fff; }
+
+/* ═══════════════════════════════
+   HERO WRAPPER — full viewport height
+═══════════════════════════════ */
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  overflow: hidden;
+}
+
+/* ── LEFT: white content panel ── */
+.hero-left {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 46%;
+  min-width: 0;
+  padding: 72px 56px 56px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg);
+  /* Curved right edge that overlaps the globe */
+  border-radius: 0 60% 60% 0 / 0 50% 50% 0;
+  margin-right: -60px;
+}
+
+/* ── RIGHT: globe panel (canvas fills it) ── */
+.hero-right {
+  flex: 1;
+  position: relative;
+  background: #041a0c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#globeCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.play-btn {
+  position: relative;
+  z-index: 3;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: rgba(10,10,10,.78);
+  border: 2px solid rgba(255,255,255,.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.play-btn:hover { background: rgba(26,122,74,.85); transform: scale(1.08); }
+.play-btn svg { width: 22px; height: 22px; fill: #fff; margin-left: 4px; }
+
+/* ── HERO LEFT CONTENT ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--green-pale);
+  border: 1px solid var(--green-border);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #166534;
+  margin-bottom: 28px;
+  width: fit-content;
+}
+.badge svg { width: 13px; height: 13px; fill: #166534; flex-shrink: 0; }
+
+.headline {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.06;
+  color: var(--dark);
+  letter-spacing: -1.5px;
+}
+.headline .green { color: var(--green); }
+.dot { color: var(--gold); }
+
+.divider {
+  width: 56px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin: 20px 0 22px;
+}
+
+.desc {
+  font-size: 14.5px;
+  color: #4b5563;
+  line-height: 1.75;
+  margin-bottom: 36px;
+  max-width: 380px;
+}
+
+.cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--green);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+}
+.btn-explore:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+.btn-articles {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--green);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1.5px solid var(--green);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+}
+.btn-articles:hover { background: var(--green-pale); transform: translateY(-1px); }
+
+/* ═══════════════════════════════
+   TRUST / FOOTER BAR
+═══════════════════════════════ */
+.trust-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 56px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.trust-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.trust-left svg { flex-shrink: 0; margin-top: 2px; }
+.trust-left a { color: var(--green); font-weight: 600; text-decoration: none; }
+.trust-left a:hover { text-decoration: underline; }
+
+.trust-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.trust-label {
+  font-size: 11px;
+  color: #9ca3af;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Logo images — replace src with your actual files */
+.brand-logo {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  opacity: .85;
+  transition: opacity .2s;
+  display: block;
+}
+.brand-logo:hover { opacity: 1; }
+
+/* Fallback text if images fail to load */
+.brand-fallback {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+.brand-cisco    { color: #049fd9; font-family: monospace; letter-spacing: 2px; }
+.brand-fortinet { color: #ee3524; }
+.brand-paloalto { color: #fa582d; }
+.brand-cloudflare { color: #f38020; }
+
+/* ═══════════════════════════════
+   DARK MODE
+═══════════════════════════════ */
+body.dark {
+  --bg: #0f1117;
+  --dark: #f9fafb;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --border: #1f2937;
+  --green-pale: #052e16;
+  --green-border: #14532d;
+}
+body.dark .navbar    { background: #0f1117; }
+body.dark .hero-left { background: #0f1117; }
+body.dark .trust-bar { background: #0f1117; }
+body.dark .btn-signin { border-color: #e5e7eb; color: #f9fafb; }
+body.dark .btn-signin:hover { background: #1f2937; }
+body.dark .desc { color: #9ca3af; }
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
+@media (max-width: 900px) {
+  .hero-wrapper { flex-direction: column; min-height: auto; }
+  .hero-left {
+    flex: none;
+    border-radius: 0;
+    margin-right: 0;
+    padding: 40px 28px;
+  }
+  .hero-right { min-height: 300px; }
+  .headline { font-size: 36px; }
+  .navbar { padding: 0 20px; }
+  .nav-links { display: none; }
+  .trust-bar { padding: 16px 28px; }
+}
