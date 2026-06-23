@@ -191,9 +191,9 @@ html, body {
 .dot { color: var(--gold); }
 
 .divider {
-  width: 56px;
+  width: 52px;
   height: 3px;
-  background: var(--gold);
+  background: var(--white);
   border-radius: 2px;
   margin: 20px 0 22px;
 }
