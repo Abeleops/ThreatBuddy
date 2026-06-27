@@ -55,8 +55,8 @@
 .nav-actions { display: flex; gap: 0.75rem; align-items: center; }
 
 .btn-outline {
-  border: 2px solid var(--green-dark);
-  color: var(--green-dark);
+  border: 2px solid var(--green);
+  color: var(--green);
   padding: 0.4rem 1rem;
   border-radius: 6px;
   font-weight: 600;
@@ -64,11 +64,11 @@
   text-decoration: none;
   transition: background 0.2s, color 0.2s;
 }
-.btn-outline:hover { background: var(--green-dark); color: var(--white); }
+.btn-outline:hover { background: var(--green); color: var(--white); }
 
 .btn-solid {
   background: var(--gold);
-  color: var(--green-dark);
+  color: var(--green);
   padding: 0.4rem 1.1rem;
   border-radius: 6px;
   font-weight: 700;
@@ -104,7 +104,7 @@
   font-family: 'Poppins', sans-serif;
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
-  color: var(--green-dark);
+  color: var(--green);
   line-height: 1.15;
   margin-bottom: 0.35rem;
 }
@@ -240,14 +240,14 @@
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 1.05rem;
-  color: var(--green-dark);
+  color: var(--green);
 }
 
 .toggle-btn {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: var(--green-dark);
+  background: var(--green);
   color: var(--white);
   font-size: 1.3rem;
   line-height: 34px;
@@ -311,7 +311,7 @@
 
 /* ── FOOTER – full bleed ── */
 .site-footer {
-  background: var(--green-dark);
+  background: var(--green);
   color: #b8d9c9;
   padding: 3.5rem 2.5rem 0;
   width: 100%;
