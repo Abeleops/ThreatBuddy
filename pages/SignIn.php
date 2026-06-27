@@ -64,6 +64,10 @@ required>
 Sign In
 </button>
 
+<a href="../index.html" style="display: inline-block; margin-top: 12px; color: #2ecc71; font-weight: 600; text-decoration: underline; text-underline-offset: 3px;">
+Go to Home
+</a>
+
 <div class="bottom-text">
 Don't have an account?
 <a href="signup.php">Get Started</a>
