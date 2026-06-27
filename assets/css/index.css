@@ -28,8 +28,13 @@ html, body {
   align-items: center;
   justify-content: space-between;
   padding: 0 56px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
 }
 
 .logo {
