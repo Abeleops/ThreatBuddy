@@ -104,6 +104,49 @@ label{
     outline:none;
 }
 
+.strength-wrapper{
+    margin-top:8px;
+}
+
+.strength-meter{
+    width:100%;
+    height:8px;
+    background:#e9ecef;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.strength-bar{
+    height:100%;
+    width:0%;
+    background:#cbd5e1;
+    border-radius:999px;
+    transition:all 0.2s ease;
+}
+
+.strength-bar.weak{
+    background:#ef4444;
+}
+
+.strength-bar.fair{
+    background:#f59e0b;
+}
+
+.strength-bar.good{
+    background:#3b82f6;
+}
+
+.strength-bar.strong{
+    background:#10b981;
+}
+
+.strength-text{
+    display:block;
+    margin-top:6px;
+    color:#64748b;
+    min-height:16px;
+}
+
 .btn{
 
     width:100%;
