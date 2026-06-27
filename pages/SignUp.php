@@ -37,7 +37,7 @@ ThreatBuddy
 
 <p>Join ThreatBuddy and stay ahead of cyber threats</p>
 
-<form action="process_signup.php" method="POST">
+<form action="../includes/process_signup.php" method="POST">
 
 <div class="row">
 

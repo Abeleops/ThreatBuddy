@@ -32,7 +32,7 @@ ThreatBuddy
 
 <p>Sign in to your ThreatBuddy account</p>
 
-<form action="process_signin.php" method="POST">
+<form action="../includes/process_signin.php" method="POST">
 
 <label>Email Address</label>
 
