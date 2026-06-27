@@ -1,59 +1,11 @@
 /* ============================================================
    library.css – ThreatBuddy Cyber Threat Library
-   Assumes index.css handles navbar base styles.
+   Theme is imported from index.css to keep styling consistent.
    ============================================================ */
 
-/* ── CSS Variables ── */
-:root {
-  --green-dark:   #0a3d2b;
-  --green-mid:    #145a3c;
-  --green-accent: #1a7a4e;
-  --green-light:  #e8f5ee;
-  --gold:         #f5a623;
-  --cream:        #fdf9f0;
-  --text-main:    #1a1a1a;
-  --text-muted:   #555;
-  --border:       #c8e0d4;
-  --white:        #ffffff;
-  --shadow:       0 2px 12px rgba(0,0,0,0.08);
-  --radius:       10px;
-}
+@import "./index.css";
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
- width: 100%;
-  min-height: 100vh;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-}
-
-body.dark {
---bg: #0f1117;
-  --text: #e5e7eb;
-  --muted: #9ca3af;
-  --border: #1f2937;
-}
-body.dark .navbar,
-body.dark .hero-left,
-body.dark .trust-bar {
-  background: #0f1117;
-}
-
-body.dark .btn-signin {
-  border-color: #e5e7eb;
-  color: #f9fafb;
-}
-
-body.dark .btn-signin:hover {
-  background: #1f2937;
-}
-
-body.dark .desc {
-  color: #9ca3af;
-}
+/* Library-specific overrides and components live below. */
 
 /* ── NAVBAR ── */
 .navbar {
