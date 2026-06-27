@@ -312,43 +312,55 @@ html, body {
   text-decoration: underline;
 }
 
-.trust-right {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
+.trust-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
 }
 
-.trust-label {
-  font-size: 11px;
-  color: #9ca3af;
-  font-weight: 500;
-  white-space: nowrap;
+.trust-label{
+    margin-right:12px;
+    color:#9ca3af;
+    font-size:13px;
+    font-weight:600;
 }
 
-.brand-logo {
-  height: 22px;
-  width: auto;
-  object-fit: contain;
-  opacity: .85;
-  display: block;
-  transition: opacity .2s ease;
+.logo-box{
+    width:100px;
+    height:45px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.brand-logo:hover {
-  opacity: 1;
+.brand-logo{
+    display:block;
+    object-fit:contain;
 }
 
-.brand-fallback {
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: .5px;
+/* Force sizes */
+
+.logo-cisco{
+    width:70px !important;
+    height:auto !important;
 }
 
-.brand-cisco { color: #049fd9; font-family: monospace; letter-spacing: 2px; }
-.brand-fortinet { color: #ee3524; }
-.brand-paloalto { color: #fa582d; }
-.brand-cloudflare { color: #f38020; }
+.logo-fortinet{
+    width:85px !important;
+    height:auto !important;
+}
+
+.logo-paloalto{
+    width:65px !important;
+    height:auto !important;
+}
+
+.logo-cloudflare{
+    width:82px !important;
+    height:auto !important;
+}
+
 
 body.dark {
   --bg: #0f1117;
