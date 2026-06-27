@@ -1,27 +1,57 @@
 <?php
+session_start();
 
-include "db.php";
-
-/*
-==========================================
-DATABASE LOGIN WILL GO HERE LATER
-==========================================
-
-Example steps:
-
-1. Receive form values
-2. Query the database
-3. Compare password
-4. Create session
-5. Redirect user
-
-*/
-
+// Get the data from the Sign In form
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-echo "<h2>Sign In Successful (Testing)</h2>";
+/*
+|--------------------------------------------------------------------------
+| Temporary Accounts (for testing only)
+|--------------------------------------------------------------------------
+*/
 
-echo "Email : ".$email."<br>";
-echo "Password : ".$password;
+$admin_email = "admin@threatbuddy.com";
+$admin_password = "admin123";
+
+$user_email = "user@gmail.com";
+$user_password = "user123";
+
+/*
+|--------------------------------------------------------------------------
+| Check if Admin
+|--------------------------------------------------------------------------
+*/
+
+if ($email == $admin_email && $password == $admin_password) {
+
+    $_SESSION['email'] = $email;
+    $_SESSION['role'] = "admin";
+
+    header("Location: ../admin/index.php");
+    exit();
+}
+
+/*
+|--------------------------------------------------------------------------
+| Check if Regular User
+|--------------------------------------------------------------------------
+*/
+
+if ($email == $user_email && $password == $user_password) {
+
+    $_SESSION['email'] = $email;
+    $_SESSION['role'] = "user";
+
+    header("Location: ../pages/dashboard.php");
+    exit();
+}
+
+/*
+|--------------------------------------------------------------------------
+| Login Failed
+|--------------------------------------------------------------------------
+*/
+
+echo "Invalid Email or Password.";
 ?>
