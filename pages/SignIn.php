@@ -8,7 +8,7 @@ session_start();
 <meta charset="UTF-8">
 <title>ThreatBuddy - Sign In</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../assets/css/Sign.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">

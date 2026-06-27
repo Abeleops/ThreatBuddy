@@ -11,7 +11,7 @@ session_start();
 
 <title>ThreatBuddy - Signup</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../assets/css/Sign.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
