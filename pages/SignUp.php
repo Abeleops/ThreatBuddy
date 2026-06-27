@@ -121,6 +121,13 @@ required>
 
 </div>
 
+<div class="strength-wrapper">
+  <div class="strength-meter">
+    <div id="password-strength-bar" class="strength-bar"></div>
+  </div>
+  <small id="password-strength-text" class="strength-text"></small>
+</div>
+
 <label>Confirm Password</label>
 
 <div class="input-box">
@@ -156,6 +163,57 @@ Go to Home
 </div>
 
 </div>
+
+<script>
+function checkPasswordStrength(password) {
+    const bar = document.getElementById('password-strength-bar');
+    const text = document.getElementById('password-strength-text');
+
+    if (!bar || !text) return;
+
+    let score = 0;
+
+    if (password.length >= 8) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[a-z]/.test(password)) score++;
+    if (/\d/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+
+    const strengthLevels = [
+        { label: '', width: '0%' },
+        { label: 'Very weak', width: '20%' },
+        { label: 'Weak', width: '40%' },
+        { label: 'Fair', width: '60%' },
+        { label: 'Good', width: '80%' },
+        { label: 'Strong', width: '100%' }
+    ];
+
+    const level = strengthLevels[Math.min(score, 5)];
+    bar.style.width = level.width;
+    bar.className = 'strength-bar';
+
+    if (score <= 2) {
+        bar.classList.add('weak');
+    } else if (score === 3) {
+        bar.classList.add('fair');
+    } else if (score === 4) {
+        bar.classList.add('good');
+    } else if (score === 5) {
+        bar.classList.add('strong');
+    }
+
+    text.textContent = password.length ? level.label : '';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const passwordInput = document.querySelector('input[name="password"]');
+    if (passwordInput) {
+        passwordInput.addEventListener('input', function () {
+            checkPasswordStrength(this.value);
+        });
+    }
+});
+</script>
 
 </body>
 
