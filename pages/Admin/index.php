@@ -39,11 +39,11 @@
 
 <head>
 
-<title>Admin Login</title>
+    <title>Admin Login</title>
 
-<link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -61,20 +61,14 @@
         <form method="POST">
             <label>Username</label>
 
-            <input
-            type="text"
-            name="username"
-            required>
+            <input type="text" name="username" required>
 
             <label>Password</label>
 
-            <input
-            type="password"
-            name="password"
-            required>
+            <input type="password" name="password" required>
 
             <button type="submit" name="login">
-            Login
+                Login
             </button>
 
         </form>
