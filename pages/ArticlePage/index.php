@@ -1,516 +1,483 @@
-
-
 <?php
-include "includes/db.php";
+    include "includes/db.php";
 
-$categories=mysqli_query($conn,"
-SELECT DISTINCT category
-FROM library_table
-WHERE category IS NOT NULL AND category<>''
-ORDER BY category ASC
-");
+    /* ==========================
+    LOAD CATEGORIES
+    ========================== */
+
+    $categories = mysqli_query($conn, "
+        SELECT DISTINCT category
+        FROM article_table
+        WHERE category IS NOT NULL
+        AND category <> ''
+        ORDER BY category ASC
+    ");
+
+    /* ==========================
+    TIME AGO FUNCTION
+    ========================== */
+
+    date_default_timezone_set("Asia/Manila");
+
+    function timeAgo($datetime)
+    {
+        $time = strtotime($datetime);
+        $diff = time() - $time;
+
+        if ($diff < 60) {
+            return $diff . " seconds ago";
+        }
+
+        if ($diff < 3600) {
+            return floor($diff / 60) . " minutes ago";
+        }
+
+        if ($diff < 86400) {
+            return floor($diff / 3600) . " hours ago";
+        }
+
+        if ($diff < 604800) {
+            return floor($diff / 86400) . " days ago";
+        }
+
+        return date("M d, Y", $time);
+    }
+
+    /* ==========================
+    ARTICLE QUERY
+    ========================== */
+
+    $where = [];
+
+    /* CATEGORY FILTER */
+
+    if (isset($_GET['category']) && $_GET['category'] != "") {
+
+        $category = mysqli_real_escape_string($conn, $_GET['category']);
+
+        $where[] = "category = '$category'";
+    }
+
+    /* SEARCH FILTER */
+
+    if (isset($_GET['search']) && trim($_GET['search']) != "") {
+
+        $search = mysqli_real_escape_string($conn, trim($_GET['search']));
+
+        $where[] = "(
+            author LIKE '%$search%' OR
+            title LIKE '%$search%' OR
+            subtitle LIKE '%$search%' OR
+            content LIKE '%$search%'
+        )";
+    }
+
+    /* BUILD SQL */
+
+    $sql = "SELECT *
+            FROM article_table";
+
+    if (!empty($where)) {
+
+        $sql .= " WHERE " . implode(" AND ", $where);
+
+    }
+
+    $sql .= " ORDER BY date_added DESC";
+
+    $result = mysqli_query($conn, $sql);
+
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>ThreatBuddy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>ThreatBuddy</title>
 
-<link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 
 <body>
 
-<nav class="navbar">
+    <nav class="navbar">
 
-<div class="nav-left">
+        <div class="nav-left">
 
-<a href="index.php" class="logo">
-<img src="assets/img/LogoTB.png" alt="">
-</a>
+            <a href="index.php" class="logo">
+                <img src="assets/img/LogoTB.png" alt="">
+            </a>
 
-<div class="search-box">
-<i class="fa-solid fa-magnifying-glass"></i>
-<input type="text" placeholder="Search articles, news, threats...">
-</div>
+            <form action="index.php" method="GET" class="search-box">
 
+                <i class="fa-solid fa-magnifying-glass"></i>
 
-<div class="nav-center">
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search articles, news, threats..."
+                    value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
 
-<a href="#" class="active">
-<i class="fa-solid fa-house"></i>
-<span>Home</span>
-</a>
+            </form>
 
-<a href="#">
-<i class="fa-regular fa-newspaper"></i>
-<span>News</span>
-</a>
 
-<a href="#">
-<i class="fa-solid fa-graduation-cap"></i>
-<span>Courses</span>
-</a>
+            <div class="nav-center">
 
-<a href="#">
-<i class="fa-solid fa-gamepad"></i>
-<span>Gaming</span>
-</a>
+                <a href="pages/error404/index.php" class="active">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </a>
 
-</div>
+                <a href="pages/error404/index.php">
+                    <i class="fa-regular fa-newspaper"></i>
+                    <span>News</span>
+                </a>
 
-</div>
+                <a href="pages/error404/index.php">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>Courses</span>
+                </a>
 
+                <a href="pages/error404/index.php">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span>Gaming</span>
+                </a>
 
-<div class="nav-right">
+            </div>
 
-<a href="#">
-<i class="fa-regular fa-bell"></i>
-</a>
+        </div>
 
-<a href="#">
-<i class="fa-solid fa-ellipsis"></i>
-</a>
 
-<a href="#" class="signin-btn">
-Sign In
-</a>
+        <div class="nav-right">
 
-<button class="dark-btn">
-<i class="fa-solid fa-moon"></i>
-</button>
+            <a href="#">
+                <i class="fa-regular fa-bell"></i>
+            </a>
 
-</div>
+            <a href="#">
+                <i class="fa-solid fa-ellipsis"></i>
+            </a>
 
-</nav>
+            <a href="#" class="signin-btn">
+                Sign In
+            </a>
 
-<div class="main-container">
+            <!-- <button class="dark-btn">
+                <i class="fa-solid fa-moon"></i>
+            </button> -->
 
-<!-- LEFT SIDEBAR -->
+        </div>
 
-<div class="left-sidebar">
+    </nav>
+    <div class="wrapper">
+        <div class="main-container">
 
-<div class="login-card">
+            <!-- LEFT SIDEBAR -->
 
-<div class="profile">
+            <div class="left-sidebar">
 
-<img src="assets/img/default.png" alt="">
+                <div class="login-card">
 
-<h4>Welcome to ThreatBuddy!</h4>
+                    <div class="profile">
 
-<p>Sign in to access your personalized cybersecurity profile</p>
+                        <img src="assets/img/default_image.png" alt="">
 
-</div>
+                        <h4>Welcome to ThreatBuddy!</h4>
 
-<a href="#" class="login-btn">Log In</a>
+                        <p>Sign in to access your personalized cybersecurity profile</p>
 
-<a href="#" class="create-btn">Create Account</a>
+                    </div>
 
-</div>
+                    <a href="#" class="login-btn">Log In</a>
 
-<div class="category-card">
+                    <a href="#" class="create-btn">Create Account</a>
 
-<div class="card-title">
-<i class="fa-solid fa-newspaper"></i>
-<span>Latest News</span>
-</div>
+                </div>
 
-<ul>
+                <div class="category-card">
 
-<?php while($cat=mysqli_fetch_assoc($categories)){ ?>
+                    <ul>
 
-<li>
-<a href="#">
-<i class="fa-solid fa-angle-right"></i>
-<span><?php echo htmlspecialchars($cat['category']); ?></span>
-</a>
-</li>
+                        <!-- ALL ARTICLES -->
+                        <li>
+                            <a href="index.php">
+                                <i class="fa-solid fa-house"></i>
+                                <span>All Articles</span>
+                            </a>
+                        </li>
 
-<?php } ?>
+                        <!-- CATEGORIES -->
+                        <?php while($cat = mysqli_fetch_assoc($categories)){ ?>
 
-<li>
-<a href="#">
-<i class="fa-regular fa-bookmark"></i>
-<span>Saved Articles</span>
-</a>
-</li>
+                        <li>
+                            <a href="index.php?category=<?php echo urlencode($cat['category']); ?>">
+                                <i class="fa-solid fa-angle-right"></i>
+                                <span><?php echo htmlspecialchars($cat['category']); ?></span>
+                            </a>
+                        </li>
 
-</ul>
+                        <?php } ?>
 
-</div>
+                        <!-- SAVED ARTICLES -->
+                        <li>
+                            <a href="#">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <span>Saved Articles</span>
+                            </a>
+                        </li>
 
-</div>
+                    </ul>
 
-<!-- CONTENT -->
+                </div>
 
-<div class="content">
+            </div>
 
-<div class="section-header">
+            <div class="main-content">
 
-<h3>Tech Stories</h3>
+                <!-- LEFT CONTENT -->
+                <div class="content">
 
-<a href="#">
-See all
-</a>
+                    <!-- SECTION HEADER -->
+                    <div class="section-header">
+                        <h3>Tech Stories</h3>
+                        <a href="pages/error404/index.php">See all</a>
+                    </div>
 
-</div>
+                    <!-- STORIES -->
+                    <div class="stories">
 
-<div class="stories">
+                        <div class="story">
+                            <img src="assets/img/1.png" alt="">
+                            <p>FEU Tech partners with OpenAI</p>
+                        </div>
 
-<div class="story">
-<img src="assets/img/1.png">
-<p>FEU Tech partners with OpenAI</p>
-</div>
+                        <div class="story">
+                            <img src="assets/img/2.png" alt="">
+                            <p>Satellite data helps trace Mindanao...</p>
+                        </div>
 
-<div class="story">
-<img src="assets/img/2.png">
-<p>Satellite data helps trace Mindanao...</p>
-</div>
+                        <div class="story">
+                            <img src="assets/img/3.png" alt="">
+                            <p>Chinese-linked hackers targeted...</p>
+                        </div>
 
-<div class="story">
-<img src="assets/img/3.png">
-<p>Chinese-linked hackers targeted...</p>
-</div>
+                        <div class="story">
+                            <img src="assets/img/4.png" alt="">
+                            <p>Why an AI company cleaned...</p>
+                        </div>
 
-<div class="story">
-<img src="assets/img/4.png">
-<p>Why an AI company cleaned...</p>
-</div>
+                        <div class="story">
+                            <img src="assets/img/5.png" alt="">
+                            <p>Government websites become...</p>
+                        </div>
 
-<div class="story">
-<img src="assets/img/5.png">
-<p>Government websites become...</p>
-</div>
+                    </div>
 
-</div>
+                    <!-- ARTICLES -->
+                    <div class="feed">
 
-<?php
-    $popular=mysqli_query($conn,"
-    SELECT *
-    FROM author_table
-    WHERE popular='Yes'
-    ORDER BY followers DESC
-    LIMIT 5
-    ");
-?>
+                        <?php while($row = mysqli_fetch_assoc($result)) { ?>
 
-<div class="article-card">
+                        <div class="article-card">
 
-<div class="article-header">
+                            <div class="article-header">
 
-<div class="article-author">
-<img src="../Admin/pages/ArticleData/uploads/authors/1783269893_rapplerpng.png" alt="">
-<div>
-<h4>ThreatBuddy News</h4>
-<span>2 hours ago • Technology</span>
-</div>
-</div>
+                                <div class="article-author">
 
-<a href="#">
-<i class="fa-solid fa-ellipsis"></i>
-</a>
+                                    <img src="../Admin/pages/ArticleData/uploads/logoTB.png" alt="Logo">
 
-</div>
+                                    <div class="article-author-info">
+                                        <h4><?php echo htmlspecialchars($row['author']); ?></h4>
 
-<div class="article-body">
+                                        <p>
+                                            <?php echo timeAgo($row['date_added']); ?>
+                                            •
+                                            <?php echo htmlspecialchars($row['category']); ?>
+                                        </p>
+                                    </div>
 
-<h2>OpenAI announces new cybersecurity initiatives for educational institutions</h2>
+                                </div>
 
-<p>
-OpenAI has announced several cybersecurity initiatives aimed at helping educational institutions improve digital security awareness, strengthen infrastructure, and provide students with safer AI-powered learning environments.
-</p>
+                                <a href="#">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </a>
 
-<img src="assets/img/certification.png" alt="">
+                            </div>
 
-</div>
+                            <div class="article-content">
 
-<div class="article-actions">
+                                <h2><?php echo htmlspecialchars($row['title']); ?></h2>
 
-<a href="#">
-<i class="fa-regular fa-thumbs-up"></i>
-Like
-</a>
+                                <p><?php echo htmlspecialchars($row['subtitle']); ?></p>
 
-<a href="#">
-<i class="fa-regular fa-comment"></i>
-Comment
-</a>
+                                <?php if(!empty($row['media'])) { ?>
 
-<a href="#">
-<i class="fa-solid fa-share"></i>
-Share
-</a>
+                                <div class="article-image">
+                                    <img src="../Admin/pages/ArticleData/uploads/<?php echo htmlspecialchars($row['media']); ?>" alt="">
+                                </div>
 
-<a href="#">
-<i class="fa-regular fa-bookmark"></i>
-Favorite
-</a>
+                                <?php } ?>
 
-</div>
+                            </div>
 
-<div class="article-footer">
+                            <div class="article-actions">
 
-<a href="#" class="follow-btn">
-Follow
-</a>
+                                <a href="#">
+                                    <i class="fa-regular fa-thumbs-up"></i>
+                                    Like
+                                </a>
 
-<a href="#" class="read-btn">
-Read More
-</a>
+                                <a href="#">
+                                    <i class="fa-regular fa-comment"></i>
+                                    Comment
+                                </a>
 
-</div>
+                                <a href="#">
+                                    <i class="fa-solid fa-share"></i>
+                                    Share
+                                </a>
 
-</div>
+                                <a href="#">
+                                    <i class="fa-regular fa-bookmark"></i>
+                                    Favorite
+                                </a>
 
-<div class="article-card">
+                            </div>
 
-<div class="article-header">
+                            <div class="article-footer">
 
-<div class="article-author">
-<img src="assets/img/default.png" alt="">
-<div>
-<h4>ThreatBuddy Security</h4>
-<span>Yesterday • Cybersecurity</span>
-</div>
-</div>
+                                <a href="#" class="follow-btn">
+                                    Follow
+                                </a>
 
-<a href="#">
-<i class="fa-solid fa-ellipsis"></i>
-</a>
+                                <a href="<?php echo htmlspecialchars($row['read_more_link']); ?>" target="_blank" class="read-btn">
+                                    Read More
+                                </a>
 
-</div>
+                            </div>
 
-<div class="article-body">
+                        </div>
 
-<h2>Researchers discover new phishing campaign targeting Filipino users</h2>
+                        <?php } ?>
 
-<p>
-Security researchers have identified a phishing campaign distributing fake login portals through SMS and social media advertisements. Users are advised to verify website URLs before entering credentials.
-</p>
+                    </div>
 
-<img src="assets/img/tech2.jpg" alt="">
+                </div>
 
-</div>
+                <!-- RIGHT SIDEBAR -->
+                <div class="right-sidebar">
 
-<div class="article-actions">
+                    <?php
+                    $popular = mysqli_query($conn,"
+                        SELECT *
+                        FROM author_table
+                        WHERE popular='Yes'
+                        ORDER BY followers DESC
+                        LIMIT 5
+                    ");
+                    ?>
 
-<a href="#">
-<i class="fa-regular fa-thumbs-up"></i>
-Like
-</a>
+                    <div class="popular-card">
 
-<a href="#">
-<i class="fa-regular fa-comment"></i>
-Comment
-</a>
+                        <div class="card-title">
+                            <h3>Popular Sources</h3>
+                        </div>
 
-<a href="#">
-<i class="fa-solid fa-share"></i>
-Share
-</a>
+                        <?php while($author = mysqli_fetch_assoc($popular)){ ?>
 
-<a href="#">
-<i class="fa-regular fa-bookmark"></i>
-Favorite
-</a>
+                        <div class="source">
 
-</div>
+                            <img src="../Admin/pages/ArticleData/uploads/authors/<?php echo htmlspecialchars($author['photo']); ?>" alt="">
 
-<div class="article-footer">
+                            <div class="source-info">
+                                <h4><?php echo htmlspecialchars($author['author_name']); ?></h4>
+                                <p><?php echo number_format($author['followers']); ?> Followers</p>
+                            </div>
 
-<a href="#" class="follow-btn">
-Follow
-</a>
+                            <a href="#" class="mini-follow">Follow</a>
 
-<a href="#" class="read-btn">
-Read More
-</a>
+                        </div>
 
-</div>
+                        <?php } ?>
 
-</div>
+                    </div>
 
-</div>
+                    <!-- Gaming -->
+                    <div class="gaming-card">
+                        
+                        <div class="card-title">
+                            <h3>Gaming</h3>
+                        </div>
+                        
+                        <div class="game-item">
+                            <img src="assets/img/game1.png" alt="">
+                            <div>
+                                <h4>Cyber Shield: Breach Defense</h4>
+                                <p>Play now</p>
+                            </div>
+                        </div>
 
-<!-- RIGHT SIDEBAR -->
+                        <div class="game-item">
+                            <img src="assets/img/game2.png" alt="">
+                            <div>
+                                <h4>Phantom Hackers</h4>
+                                <p>Play now</p>
+                            </div>
+                        </div>
 
-<div class="right-sidebar">
+                        <div class="game-item">
+                            <img src="assets/img/game3.png" alt="">
+                            <div>
+                                <h4>Firewall Frenzy</h4>
+                                <p>Play now</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    const stories = document.querySelector(".stories");
 
-<div class="popular-card">
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-<div class="card-title">
+    stories.addEventListener("mousedown", (e) => {
+        isDown = true;
+        startX = e.pageX - stories.offsetLeft;
+        scrollLeft = stories.scrollLeft;
+    });
 
-<h3>Popular Sources</h3>
+    stories.addEventListener("mouseleave", () => {
+        isDown = false;
+    });
 
-</div>
+    stories.addEventListener("mouseup", () => {
+        isDown = false;
+    });
 
-<?php while($row=mysqli_fetch_assoc($popular)){ ?>
-
-<div class="source">
-
-<img src="../Admin/pages/ArticleData/uploads/authors/<?php echo htmlspecialchars($row['photo']); ?>" alt="">
-
-<div class="source-info">
-
-<h4><?php echo htmlspecialchars($row['author_name']); ?></h4>
-
-<p><?php echo number_format($row['followers']); ?> Followers</p>
-
-</div>
-
-<a href="#" class="mini-follow">
-Follow
-</a>
-
-</div>
-
-<?php } ?>
-
-</div>
-
-<div class="gaming-card">
-
-<div class="card-title">
-
-<h3>Gaming</h3>
-
-</div>
-
-<div class="game-item">
-
-<img src="assets/img/game1.png" alt="">
-
-<div>
-
-<h4>Valorant Patch 11.02 Released</h4>
-
-<p>Read More</p>
-
-</div>
-
-</div>
-
-<div class="game-item">
-
-<img src="assets/img/game2.png" alt="">
-
-<div>
-
-<h4>League of Legends New Champion</h4>
-
-<p>Read More</p>
-
-</div>
-
-</div>
-
-<div class="game-item">
-
-<img src="assets/img/game3.png" alt="">
-
-<div>
-
-<h4>Counter-Strike 2 Major Updates</h4>
-
-<p>Read More</p>
-
-</div>
-
-</div>
-
-<div class="ready-card">
-
-<h3>More Categories</h3>
-
-<div class="ready-item">
-<img src="assets/img/tech1.jpg" alt="">
-<div>
-<h4>Artificial Intelligence</h4>
-<p>Coming Soon</p>
-</div>
-</div>
-
-<div class="ready-item">
-<img src="assets/img/tech2.jpg" alt="">
-<div>
-<h4>Cybersecurity</h4>
-<p>Coming Soon</p>
-</div>
-</div>
-
-<div class="ready-item">
-<img src="assets/img/tech3.jpg" alt="">
-<div>
-<h4>Programming</h4>
-<p>Coming Soon</p>
-</div>
-</div>
-
-<div class="ready-item">
-<img src="assets/img/tech4.jpg" alt="">
-<div>
-<h4>Networking</h4>
-<p>Coming Soon</p>
-</div>
-</div>
-
-<div class="ready-item">
-<img src="assets/img/tech5.jpg" alt="">
-<div>
-<h4>Ethical Hacking</h4>
-<p>Coming Soon</p>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<script>
-
-const stories=document.querySelector(".stories");
-
-let isDown=false;
-let startX;
-let scrollLeft;
-
-stories.addEventListener("mousedown",(e)=>{
-isDown=true;
-startX=e.pageX-stories.offsetLeft;
-scrollLeft=stories.scrollLeft;
-});
-
-stories.addEventListener("mouseleave",()=>{
-isDown=false;
-});
-
-stories.addEventListener("mouseup",()=>{
-isDown=false;
-});
-
-stories.addEventListener("mousemove",(e)=>{
-if(!isDown)return;
-e.preventDefault();
-const x=e.pageX-stories.offsetLeft;
-const walk=(x-startX)*1.5;
-stories.scrollLeft=scrollLeft-walk;
-});
-
-</script>
+    stories.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - stories.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        stories.scrollLeft = scrollLeft - walk;
+    });
+    </script>
 
 </body>
+
 </html>
