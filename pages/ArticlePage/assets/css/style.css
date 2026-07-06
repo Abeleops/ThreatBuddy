@@ -199,7 +199,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px;
+  padding: 0 70px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
   z-index: 1000;
 }
@@ -299,7 +299,7 @@ ul {
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
 }
 
 .nav-icon {
@@ -366,15 +366,17 @@ ul {
 ==========================*/
 
 .main-container {
-  width: min(1700px, 95%);
-  margin: auto;
-  padding: 95px 0 30px;
   display: grid;
-  grid-template-columns: 270px minmax(0, 1fr) 320px;
+  grid-template-columns: 260px 1fr;
   gap: 25px;
-  align-items: start;
+  max-width: 2000px;
+  padding: 95px 20px 30px;
 }
 
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
 /*==========================
     LEFT SIDEBAR
 ==========================*/
@@ -392,26 +394,22 @@ ul {
     CONTENT
 ==========================*/
 
-.content {
+.main-content {
   display: flex;
-  flex-direction: column;
   gap: 25px;
+  align-items: flex-start;
+  width: 100%;
   min-width: 0;
 }
 
-/*==========================
-    RIGHT SIDEBAR
-==========================*/
-
-.right-sidebar {
-  position: sticky;
-  top: 95px;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  height: fit-content;
+.content {
+  width: 100%;
 }
 
+.right-sidebar {
+  flex: 0 0 320px;
+  width: 320px;
+}
 /*==========================
     COMMON CARD
 ==========================*/
@@ -742,6 +740,7 @@ ul {
   scroll-behavior: smooth;
   scrollbar-width: none;
   cursor: grab;
+  margin-bottom: 20px;
 }
 
 .stories::-webkit-scrollbar {
@@ -1138,256 +1137,11 @@ ul {
 }
 
 /*==========================
-    ARTICLE FEED
-==========================*/
-
-.feed {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.article-card {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-  padding: 22px;
-  transition: var(--transition);
-  overflow: hidden;
-}
-
-.article-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
-}
-
-/*==========================
-    ARTICLE HEADER
-==========================*/
-
-.article-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 18px;
-}
-
-.article-author {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.article-author img {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--primary-light);
-}
-
-.article-author-info h4 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 3px;
-}
-
-.article-author-info p {
-  font-size: 13px;
-  color: var(--gray-500);
-}
-
-.article-menu {
-  width: 38px;
-  height: 38px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  transition: var(--transition);
-  cursor: pointer;
-}
-
-.article-menu:hover {
-  background: var(--gray-100);
-}
-
-/*==========================
-    ARTICLE CONTENT
-==========================*/
-
-.article-content h2 {
-  font-size: 28px;
-  line-height: 1.35;
-  font-weight: 700;
-  margin-bottom: 14px;
-}
-
-.article-content p {
-  font-size: 15px;
-  line-height: 1.9;
-  color: var(--gray-500);
-  margin-bottom: 20px;
-}
-
-.article-content img {
-  width: 100%;
-  height: 450px;
-  object-fit: cover;
-  border-radius: 18px;
-}
-
-/*==========================
-    ARTICLE TAGS
-==========================*/
-
-.article-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 18px;
-  margin-bottom: 18px;
-}
-
-.article-tags span {
-  padding: 7px 14px;
-  background: var(--primary-light);
-  color: var(--primary);
-  border-radius: 30px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.article-tags .orange {
-  background: var(--secondary-light);
-  color: var(--secondary);
-}
-
-/*==========================
-    ARTICLE STATS
-==========================*/
-
-.article-stats {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 0;
-  border-top: 1px solid var(--gray-300);
-  border-bottom: 1px solid var(--gray-300);
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.article-stats span {
-  font-size: 13px;
-  color: var(--gray-500);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/*==========================
-    ARTICLE ACTIONS
-==========================*/
-
-.article-actions {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.article-actions a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 12px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  transition: var(--transition);
-}
-
-.article-actions a:hover {
-  background: var(--primary-light);
-  color: var(--primary);
-}
-
-.article-actions i {
-  font-size: 15px;
-}
-
-/*==========================
-    ARTICLE FOOTER
-==========================*/
-
-.article-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  margin-top: 5px;
-}
-
-.follow-btn {
-  padding: 11px 22px;
-  background: var(--secondary);
-  color: var(--white);
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  transition: var(--transition);
-}
-
-.follow-btn:hover {
-  background: var(--secondary-dark);
-}
-
-.read-btn {
-  padding: 11px 22px;
-  background: var(--primary);
-  color: var(--white);
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  transition: var(--transition);
-}
-
-.read-btn:hover {
-  background: var(--primary-dark);
-}
-
-/*==========================
-    FEATURED ARTICLE
-==========================*/
-
-.article-featured {
-  border-left: 6px solid var(--primary);
-}
-
-/*==========================
-    IMAGE ZOOM
-==========================*/
-
-.article-image {
-  overflow: hidden;
-  border-radius: 18px;
-}
-
-.article-image img {
-  transition: 0.4s;
-}
-
-.article-card:hover .article-image img {
-  transform: scale(1.04);
-}
-
-/*==========================
     GAMING
 ==========================*/
 
 .gaming-card {
+  margin-top: 20px;
   background: var(--surface);
   border-radius: var(--radius-lg);
   padding: 22px;
@@ -1425,6 +1179,15 @@ ul {
   border-bottom: 1px solid var(--gray-300);
   transition: var(--transition);
   cursor: pointer;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.game-item img {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .game-item:last-child {
