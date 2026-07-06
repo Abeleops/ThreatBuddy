@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2026 at 05:48 PM
+-- Generation Time: Jul 06, 2026 at 03:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -77,16 +77,18 @@ CREATE TABLE `author_table` (
   `user_id` int(11) NOT NULL,
   `author_name` varchar(100) NOT NULL,
   `photo` varchar(255) NOT NULL,
-  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `followers` int(11) NOT NULL DEFAULT 0,
+  `popular` enum('Yes','No') NOT NULL DEFAULT 'No'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `author_table`
 --
 
-INSERT INTO `author_table` (`id`, `user_id`, `author_name`, `photo`, `date_created`) VALUES
-(3, 0, 'Ivan', '1783261135_645688153_762197846683701_4456408400706656274_n.png', '2026-07-05 14:18:55'),
-(4, 0, 'asdf', '1783265173_images (1).jpg', '2026-07-05 15:26:13');
+INSERT INTO `author_table` (`id`, `user_id`, `author_name`, `photo`, `date_created`, `followers`, `popular`) VALUES
+(5, 0, 'Rappler', '1783269893_rapplerpng.png', '2026-07-05 16:44:53', 54355, 'Yes'),
+(6, 0, 'ABS-CBN', '1783269959_abscbn.png', '2026-07-05 16:45:59', 76543, 'Yes');
 
 -- --------------------------------------------------------
 
@@ -192,7 +194,7 @@ ALTER TABLE `article_table`
 -- AUTO_INCREMENT for table `author_table`
 --
 ALTER TABLE `author_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `library_table`
