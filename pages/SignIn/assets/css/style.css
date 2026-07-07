@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f7f7f7;
+
+    /* Dotted background */
+    background-image: radial-gradient(#d2d2d2 1px, transparent 1px);
+    background-size:22px 22px;
+}
+
+.container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+.card{
+    width:420px;
+    background:#fff;
+    padding:40px 35px;
+    border-radius:8px;
+    box-shadow:0 12px 35px rgba(0,0,0,.12);
+}
+
+/* =========================
+        LOGO
+========================= */
+
+.logo{
+    display:flex;
+    justify-content:center;
+    margin-bottom:25px;
+}
+
+.logo img{
+    width:185px;
+    height:auto;
+}
+
+/* =========================
+        HEADER
+========================= */
+
+h1{
+    text-align:center;
+    font-size:2rem;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#6b7280;
+    font-size:14px;
+    margin-bottom:30px;
+    line-height:1.5;
+}
+
+/* =========================
+        FORM
+========================= */
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    font-size:14px;
+    font-weight:600;
+    color:#1f2937;
+    margin-bottom:8px;
+}
+
+.input-box{
+    display:flex;
+    align-items:center;
+    border:1px solid #d1d5db;
+    border-radius:6px;
+    height:48px;
+    transition:.25s;
+}
+
+.input-box:focus-within{
+    border-color:#059669;
+    box-shadow:0 0 0 3px rgba(5,150,105,.15);
+}
+
+.input-box i{
+    width:48px;
+    text-align:center;
+    color:#059669;
+    font-size:17px;
+}
+
+.input-box input{
+    flex:1;
+    border:none;
+    outline:none;
+    font-size:14px;
+    color:#111827;
+    background:transparent;
+    padding-right:10px;
+}
+
+.input-box input::placeholder{
+    color:#9ca3af;
+}
+
+/* Eye icon */
+
+.toggle-password{
+    width:48px;
+    text-align:center;
+    cursor:pointer;
+    color:#9ca3af;
+    transition:.3s;
+}
+
+.toggle-password:hover{
+    color:#059669;
+}
+
+/* =========================
+      PASSWORD STRENGTH
+========================= */
+
+.strength-wrapper{
+    margin-top:8px;
+}
+
+.strength-meter{
+    width:100%;
+    height:4px;
+    background:#e5e7eb;
+    border-radius:50px;
+    overflow:hidden;
+}
+
+.strength-bar{
+    height:100%;
+    width:50%;
+    background:#f4b400;
+    transition:.3s;
+}
+
+.strength-text{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:5px;
+    font-size:11px;
+    color:#6b7280;
+}
+
+/* =========================
+      FORGOT PASSWORD
+========================= */
+
+.options{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:10px;
+}
+
+.options a{
+    text-decoration:none;
+    color:#059669;
+    font-size:13px;
+    font-weight:600;
+}
+
+.options a:hover{
+    text-decoration:underline;
+}
+
+/* =========================
+        BUTTON
+========================= */
+
+.btn{
+    width:100%;
+    margin-top:25px;
+    height:50px;
+    border:none;
+    border-radius:6px;
+    background:#059669;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn:hover{
+    background:#047857;
+}
+
+/* =========================
+       BOTTOM TEXT
+========================= */
+
+.bottom-text{
+    margin-top:22px;
+    text-align:center;
+    font-size:13px;
+    color:#4b5563;
+}
+
+.bottom-text a{
+    color:#059669;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.bottom-text a:hover{
+    text-decoration:underline;
+}
+
+/* =========================
+       RESPONSIVE
+========================= */
+
+@media (max-width:480px){
+
+    .container{
+        padding:20px;
+    }
+
+    .card{
+        width:100%;
+        padding:30px 25px;
+    }
+
+    h1{
+        font-size:1.8rem;
+    }
+
+    .logo img{
+        width:165px;
+    }
+
+}
