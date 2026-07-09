@@ -843,6 +843,7 @@ body.dark .desc {
 #navLinks {
   display: flex;
   gap: 5rem;
+  
 }
 
 .logo {
