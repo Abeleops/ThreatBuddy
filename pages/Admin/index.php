@@ -50,7 +50,9 @@
 <body>
 
     <div class="login-card">
-        <img src="assets/img/LogoTB.png" class="logo">
+        <a href="../../index.php">
+    <img src="assets/img/LogoTB.png" class="logo" alt="ThreatBuddy Logo">
+</a>
         <h1>Admin Portal</h1>
         <p>Please login to your account</p>
         <?php
@@ -70,6 +72,7 @@
             <button type="submit" name="login">
                 Login
             </button>
+            
 
         </form>
 
