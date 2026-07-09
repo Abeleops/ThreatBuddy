@@ -4,8 +4,8 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/Ivanlizardo/">
-    <img src=".\assets\img\LogoTB.png" alt="Threatbuddy Logo" width="130" height="100">
+  <a href="#">
+    <img src=".\assets\img\LogoTB.png" alt="Threatbuddy Logo" width="130" height="130">
   </a>
   <h3 align="center">PHP - Final Porject</h3>
 </div>
@@ -82,5 +82,5 @@ Threatbuddy
 | Text icons   | Use svg icons to easily edit when hovered, style, etc         | https://fontawesome.com/       |
 | Google Fonts | To use Montserrat font which provide readable and modern look | https://fonts.google.com/      |
 | Pinterest    | For easy idea gathering of design                             | https://ph.pinterest.com/      |
-| Canva        | For making my logo                                            | https://https://www.canva.com/ |
-| Photoshop    | For making my logo less pixalated                             | Application                    |
+| Canva        | For making our logo                                           | https://https://www.canva.com/ |
+| Photoshop    | For making our logo less pixalated and other img              | Application                    |
