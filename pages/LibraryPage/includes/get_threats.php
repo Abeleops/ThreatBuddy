@@ -39,8 +39,8 @@ try {
                 "about" => $row["about"],
                 "how_it_works" => $row["how_it_works"],
                 "prevention_tips" => $row["prevention"],
-                "video_url" => "",
-                "icon_url" => (!empty($row["image"]) ? "../../assets/img/" . $row["image"] : "../../assets/img/lock.png")
+                "image" => $row["image"],
+                "video_url" => ""
             );
         }
     }
