@@ -1,8 +1,14 @@
 <?php
 
-$conn = mysqli_connect("localhost", "root", "", "admin_db");
+$conn = mysqli_connect(
+    "localhost",
+    "root",
+    "",
+    "admin_db"
+);
 
-if(!$conn){
-    die("Database Connection Failed");
+if (!$conn) {
+    die("Connection Failed: " . mysqli_connect_error());
 }
+
 ?>

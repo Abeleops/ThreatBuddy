@@ -147,30 +147,105 @@
     </div>
 
     <div class="footer-bottom">
-      <img src="../assets/img/seal.png" alt="" class="footer-seal" />
+      <img src="../../assets/img/seal.png" alt="" class="footer-seal" />
       <p>© 2026 ThreatBuddy. All rights reserved</p>
     </div>
   </footer>
 
   <script>
-    // ── Accordion ──
-    document.querySelectorAll('.threat-header').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const card = btn.closest('.threat-card');
-        const isOpen = card.classList.contains('open');
-        // Close all
-        document.querySelectorAll('.threat-card').forEach(c => {
-          c.classList.remove('open');
-          c.querySelector('.threat-header').setAttribute('aria-expanded', 'false');
-          c.querySelector('.toggle-btn').textContent = '+';
+    // ── Load threats from database ──
+    async function loadThreats() {
+      try {
+        const response = await fetch('includes/get_threats.php');
+        const threats = await response.json();
+        
+        const threatList = document.getElementById('threatList');
+        threatList.innerHTML = ''; // Clear existing content
+        
+        threats.forEach(threat => {
+          const threatCard = document.createElement('div');
+          threatCard.className = 'threat-card';
+          threatCard.setAttribute('data-category', threat.category);
+          threatCard.setAttribute('data-severity', threat.severity);
+          
+          const preventionTips = threat.prevention_tips 
+            ? threat.prevention_tips.split('\n').map(tip => `<li>${tip}</li>`).join('')
+            : '';
+          
+          const howItWorks = threat.how_it_works 
+            ? threat.how_it_works.split('\n').map(step => `<li>${step}</li>`).join('')
+            : '';
+          
+          threatCard.innerHTML = `
+            <button class="threat-header" aria-expanded="false">
+              <div class="threat-icon-wrap">
+                <img src="${threat.icon_url || '../../assets/img/lock.png'}" alt="" class="threat-icon" />
+              </div>
+              <span class="threat-name">${threat.name}</span>
+              <span class="toggle-btn">+</span>
+            </button>
+            <div class="threat-body">
+              <div class="tb-media">
+                ${threat.video_url ? `
+                  <video controls preload="none">
+                    <source src="${threat.video_url}" type="video/mp4" />
+                    Your browser does not support video.
+                  </video>
+                ` : ''}
+              </div>
+              <div class="tb-info">
+                <p><strong>Category:</strong> ${threat.category}</p>
+                <p><strong>Severity:</strong> <span class="badge badge-${threat.severity.toLowerCase()}">${threat.severity}</span></p>
+                <p><strong>About:</strong> ${threat.about}</p>
+                ${howItWorks ? `
+                  <p><strong>How it Works:</strong></p>
+                  <ol>${howItWorks}</ol>
+                ` : ''}
+                ${preventionTips ? `
+                  <p><strong>Prevention Tips:</strong></p>
+                  <ol>${preventionTips}</ol>
+                ` : ''}
+              </div>
+            </div>
+          `;
+          
+          threatList.appendChild(threatCard);
         });
-        if (!isOpen) {
-          card.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-          btn.querySelector('.toggle-btn').textContent = '−';
-        }
+        
+        // Reinitialize accordion listeners after loading threats
+        initializeAccordions();
+      } catch (error) {
+        console.error('Error loading threats:', error);
+        document.getElementById('threatList').innerHTML = '<p class="no-results">Error loading threats. Please try again.</p>';
+      }
+    }
+
+    // ── Accordion ──
+    function initializeAccordions() {
+      document.querySelectorAll('.threat-header').forEach(btn => {
+        btn.removeEventListener('click', handleAccordionClick);
+        btn.addEventListener('click', handleAccordionClick);
       });
-    });
+    }
+
+    function handleAccordionClick() {
+      const btn = this;
+      const card = btn.closest('.threat-card');
+      const isOpen = card.classList.contains('open');
+      
+      // Close all
+      document.querySelectorAll('.threat-card').forEach(c => {
+        c.classList.remove('open');
+        c.querySelector('.threat-header').setAttribute('aria-expanded', 'false');
+        c.querySelector('.toggle-btn').textContent = '+';
+      });
+      
+      if (!isOpen) {
+        card.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.querySelector('.toggle-btn').textContent = '−';
+      }
+    }
 
     // ── Filter / Search ──
     function applyFilters() {
@@ -202,6 +277,9 @@
       document.body.classList.toggle('dark');
       toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
     });
+
+    // ── Load threats on page load ──
+    document.addEventListener('DOMContentLoaded', loadThreats);
   </script>
 </body>
 </html>
