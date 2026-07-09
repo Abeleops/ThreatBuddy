@@ -11,7 +11,7 @@
 </div>
 <!-- TODO: Make a short description -->
 <div align="center">
-  This project demonstrates the development of ThreatBuddy, a web-based cybersecurity awareness platform designed to educate users about various cyber threats. The website features a Library page that provides comprehensive information on different cyber threats, including their definitions, how they work, and recommended prevention strategies. It also includes TMedia, an article-sharing platform with an account system that allows users and researchers to publish, access, and manage cybersecurity-related articles. Designed with a minimalist interface inspired by the FEU color palette, ThreatBuddy delivers an organized, accessible, and user-friendly experience that promotes cybersecurity awareness and knowledge sharing.
+  ThreatBuddy is a web-based cybersecurity awareness platform that educates users about various cyber threats. It features a **Library** containing threat definitions, how they work, and prevention strategies, as well as **TMedia**, an article platform with an account system for publishing and managing cybersecurity content. Designed with a minimalist interface inspired by the FEU color palette, ThreatBuddy provides an organized and user-friendly learning experience.
 </div>
 
 <br />
