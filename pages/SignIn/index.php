@@ -1,3 +1,44 @@
+<?php
+require_once "includes/db.php";
+
+$error = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $stmt = $conn->prepare("SELECT * FROM userdata_table WHERE email = ? AND password = ?");
+    $stmt->bind_param("ss", $email, $password);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 1) {
+
+        session_start();
+
+        $user = $result->fetch_assoc();
+
+        $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['first_name'] = $user['first_name'];
+        $_SESSION['last_name'] = $user['last_name'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['phone'] = $user['phone'];
+
+        header("Location: ../ArticlePage/index.php");
+        exit();
+
+    } else {
+
+        $error = "Invalid email or password.";
+
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,9 +74,15 @@
         <p class="subtitle">
             Sign in to your ThreatBuddy account
         </p>
-
+        
+        <?php if (!empty($error)): ?>
+            <p style="color:red; text-align:center;">
+                <?= $error ?>
+            </p>
+            <br>
+        <?php endif; ?>
         <!-- Login Form -->
-        <form action="process/process_signin.php" method="POST">
+        <form method="POST">
 
             <div class="form-group">
 
@@ -92,7 +139,7 @@
 
             Don't have an account?
 
-            <a href="signup.php">
+            <a href="../SignUp/index.php">
                 Get Started
             </a>
 
