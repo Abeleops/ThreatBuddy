@@ -133,13 +133,13 @@ body > .lib-section {
 .brand-threat {
   font-size: 14px;
   font-weight: 700;
-  color: var(--text);
+  color: #ffffff;
 }
 
 .brand-buddy {
   font-size: 14px;
   font-weight: 700;
-  color: var(--green);
+  color: #1fb575;
 }
 
 .nav-actions {

@@ -88,7 +88,7 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <a href="../index.html" class="nav-brand footer-logo-link">
-          <img src="../assets/img/logo.png" alt="ThreatBuddy" class="nav-logo" />
+          <img src="../../assets/img/LogoTB.png" alt="ThreatBuddy" class="nav-logo" />
           <span class="brand-threat">Threat</span><span class="brand-buddy">Buddy</span>
         </a>
         <p>Your trusted companion for threat intelligence, cybersecurity awareness, and a safer digital future.</p>
