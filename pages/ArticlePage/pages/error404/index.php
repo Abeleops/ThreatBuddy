@@ -38,7 +38,7 @@
         URL is incorrect.
       </p>
 
-      <a href="../../index.php" class="btn back" target="_blank">
+      <a href="../../index.php" class="btn back" >
         <i class="fa-solid fa-arrow-left"></i>
         Go Back
       </a>
