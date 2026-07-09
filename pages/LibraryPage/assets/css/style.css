@@ -50,10 +50,10 @@ body > .lib-section {
 }
 
 .navbar {
-  height: 72px;
+  height: 80px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 56px;
   border-bottom: 1px solid var(--border);
   background: var(--white);
@@ -63,6 +63,15 @@ body > .lib-section {
   width: 100%;
   z-index: 20;
   flex-shrink: 0;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+  gap: 48px;
 }
 
 .navbar .leftSide {
@@ -80,22 +89,23 @@ body > .lib-section {
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   text-decoration: none;
   flex-shrink: 0;
-  margin-right: 32px;
+  margin-right: 24px;
+  white-space: nowrap;
 }
 
 .nav-logo {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -131,13 +141,13 @@ body > .lib-section {
 }
 
 .brand-threat {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: #ffffff;
 }
 
 .brand-buddy {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: #1fb575;
 }
@@ -145,13 +155,13 @@ body > .lib-section {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   flex-shrink: 0;
 }
 
 .btn-signin,
 .btn-outline {
-  padding: 10px 18px;
+  padding: 11px 20px;
   border-radius: 6px;
   border: 1px solid var(--border);
   background: var(--white);
@@ -163,6 +173,7 @@ body > .lib-section {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .btn-signin:hover,
@@ -173,7 +184,7 @@ body > .lib-section {
 
 .btn-get-started,
 .btn-solid {
-  padding: 10px 18px;
+  padding: 11px 24px;
   border-radius: 6px;
   border: none;
   background: var(--gold);
@@ -185,6 +196,7 @@ body > .lib-section {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .btn-get-started:hover,
@@ -193,15 +205,16 @@ body > .lib-section {
 }
 
 .btn-theme {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: var(--text);
+  background: #1f2937;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 18px;
 }
 
 .btn-theme svg {
