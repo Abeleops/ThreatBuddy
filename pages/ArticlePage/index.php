@@ -57,7 +57,7 @@
 
         $category = mysqli_real_escape_string($conn, $_GET['category']);
 
-        $where[] = "category = '$category'";
+        $where[] = "article_table.category = '$category'";
     }
 
     /* SEARCH FILTER */
@@ -67,25 +67,29 @@
         $search = mysqli_real_escape_string($conn, trim($_GET['search']));
 
         $where[] = "(
-            author LIKE '%$search%' OR
-            title LIKE '%$search%' OR
-            subtitle LIKE '%$search%' OR
-            content LIKE '%$search%'
+            article_table.author LIKE '%$search%' OR
+            article_table.title LIKE '%$search%' OR
+            article_table.subtitle LIKE '%$search%' OR
+            article_table.content LIKE '%$search%'
         )";
     }
 
     /* BUILD SQL */
 
-    $sql = "SELECT *
-            FROM article_table";
+    $sql = "
+    SELECT
+        article_table.*,
+        author_table.photo
+    FROM article_table
+    LEFT JOIN author_table
+    ON article_table.author = author_table.author_name
+    ";
 
     if (!empty($where)) {
-
         $sql .= " WHERE " . implode(" AND ", $where);
-
     }
 
-    $sql .= " ORDER BY date_added DESC";
+    $sql .= " ORDER BY article_table.date_added DESC";
 
     $result = mysqli_query($conn, $sql);
 
@@ -117,7 +121,7 @@
 
         <div class="nav-left">
 
-            <a href="index.php" class="logo">
+            <a href="../../index.php" class="logo">
                 <img src="assets/img/LogoTB.png" alt="">
             </a>
 
@@ -334,7 +338,7 @@
 
                                 <div class="article-author">
 
-                                    <img src="../Admin/pages/ArticleData/uploads/logoTB.png" alt="Logo">
+                                    <img src="../Admin/pages/ArticleData/uploads/authors/<?php echo !empty($row['photo']) ? htmlspecialchars($row['photo']) : 'default.png'; ?>" alt="Logo">
 
                                     <div class="article-author-info">
                                         <h4><?php echo htmlspecialchars($row['author']); ?></h4>
