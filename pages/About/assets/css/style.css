@@ -209,86 +209,212 @@
     max-width:none;
   }
 
-  /* ===== TEAM SECTION ===== */
-  .team-section{
-    padding:80px 60px 100px;
-    background:linear-gradient(180deg,#eef1ec 0%, #1a6b46 55%, #0b3d2e 100%);
+ /* ==========================================
+   TEAM SECTION
+========================================== */
+
+.team-section{
+    padding:90px 60px 100px;
+    background:linear-gradient(
+        180deg,
+        #eef1ec 0%,
+        #1a6b46 55%,
+        #0b3d2e 100%
+    );
     text-align:center;
-  }
-  .eyebrow{
-    color:var(--green-dark);
-    font-weight:800;
-    font-size:14px;
-    letter-spacing:1px;
+}
+
+.eyebrow{
     display:inline-flex;
     align-items:center;
     gap:8px;
-    margin-bottom:14px;
-  }
-  .eyebrow .dot{margin-left:0;}
-  .team-section .eyebrow{color:#0b3d2e;}
-  .team-section h2{
-    font-size:38px;
-    color:var(--ink);
-  }
-  .team-section h2 span{color:var(--green-mid);}
-  .team-section > p.subtitle{
-    max-width:640px;
-    margin:18px auto 0;
-    font-weight:600;
-    color:#1c1c1c;
-    font-size:15px;
-  }
+    margin-bottom:15px;
 
-  .team-grid{
-    margin-top:70px;
+    color:#0b3d2e;
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.eyebrow .dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--gold);
+}
+
+.team-section h2{
+    font-size:42px;
+    font-weight:800;
+    color:var(--ink);
+}
+
+.team-section h2 span{
+    color:var(--green-mid);
+}
+
+.team-section .subtitle{
+    max-width:720px;
+    margin:20px auto 0;
+
+    font-size:16px;
+    line-height:1.7;
+    color:#233328;
+}
+
+/* ==========================================
+   GRID
+========================================== */
+
+.team-grid{
+    margin:70px auto 0;
+    max-width:1200px;
+
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    row-gap:60px;
-    column-gap:20px;
-    max-width:900px;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  .team-grid.row-two{
-    grid-template-columns:repeat(2,1fr);
-    max-width:400px;
-    margin-top:60px;
-  }
-  .member{
+    gap:60px 40px;
+}
+
+/* ==========================================
+   MEMBER CARD
+========================================== */
+
+.member{
     display:flex;
     flex-direction:column;
     align-items:center;
-  }
-  .avatar-ring{
-    width:150px;height:150px;
-    border-radius:50%;
-    padding:5px;
-    background:conic-gradient(var(--gold) 0deg 120deg, var(--green-mid) 120deg 360deg);
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:20px;
-  }
-  .avatar{
-    width:100%;height:100%;
-    border-radius:50%;
-    background:#dfe4e0;
-    border:4px solid #fff;
-    display:flex;align-items:center;justify-content:center;
-    font-size:34px;
-    font-weight:800;
-    color:#5b6a62;
-  }
-  .member h3{
-    font-size:19px;
-    color:#fff;
-  }
-  .member p{
-    font-size:13px;
-    color:#cfe0d3;
-    margin-top:4px;
-    font-weight:500;
-  }
+    text-align:center;
+}
 
+/* ==========================================
+   PHOTO
+========================================== */
+
+.avatar-ring{
+    width:170px;
+    height:170px;
+
+    padding:5px;
+    border-radius:50%;
+
+    background:conic-gradient(
+        var(--gold) 0deg 120deg,
+        var(--green-mid) 120deg 360deg
+    );
+
+    margin-bottom:20px;
+}
+
+.avatar{
+    width:100%;
+    height:100%;
+
+    border-radius:50%;
+    overflow:hidden;
+
+    background:#ddd;
+    border:4px solid #fff;
+}
+
+.avatar img{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+    object-position:center;
+
+    border-radius:50%;
+}
+
+/* ==========================================
+   TEXT
+========================================== */
+
+.member h3{
+    margin:0;
+
+    font-size:22px;
+    font-weight:700;
+
+    color:#fff;
+}
+
+.member .role{
+    margin:8px 0 18px;
+
+    color:var(--gold);
+
+    font-size:15px;
+    font-weight:700;
+}
+
+.member ul{
+    margin:0;
+    padding:0;
+
+    list-style:none;
+    max-width:260px;
+}
+
+.member ul li{
+    margin-bottom:8px;
+
+    color:#d7e5dc;
+
+    font-size:14px;
+    line-height:1.6;
+}
+
+/* ==========================================
+   HOVER
+========================================== */
+
+.member:hover .avatar-ring{
+    transform:translateY(-8px);
+    transition:.3s ease;
+}
+
+.member:hover h3{
+    color:var(--gold);
+    transition:.3s ease;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:992px){
+
+    .team-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media (max-width:768px){
+
+    .team-section{
+        padding:70px 25px;
+    }
+
+    .team-grid{
+        grid-template-columns:1fr;
+        gap:50px;
+    }
+
+    .team-section h2{
+        font-size:34px;
+    }
+
+    .avatar-ring{
+        width:150px;
+        height:150px;
+    }
+
+}
   /* ===== MISSION/VISION/GOAL ===== */
   .mvg-section{
     padding:80px 60px;
