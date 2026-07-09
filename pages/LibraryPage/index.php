@@ -13,12 +13,12 @@
   <!-- ───────── NAVBAR ───────── -->
   <nav class="navbar">
     <div class="nav-inner">
-      <a class="nav-brand" href="../../index.html">
+      <a class="nav-brand" href="../../index.php">
         <img src="../../assets/img/LogoTB.png" alt="ThreatBuddy logo" class="nav-logo" />
         <span class="brand-threat">Threat</span><span class="brand-buddy">Buddy</span>
       </a>
       <ul class="nav-links">
-        <li><a href="index.php" class="nav-link active">Library</a></li>
+        <li><a href="../LibraryPage/index.php" class="nav-link active">Library</a></li>
         <li><a href="../ArticlePage/index.php" class="nav-link">TMedia</a></li>
         <li><a href="../Admin/index.php" class="nav-link">Resources ▾</a></li>
         <li><a href="../About/index.html" class="nav-link">About</a></li>
