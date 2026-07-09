@@ -14,7 +14,7 @@
       <div class="leftSide">
         <!-- Logo -->
         <a href="#" class="logo">
-          <img src="./assets/img/LogoTB.png" alt="" id="LogoTb" />
+          <img src="" alt="" id="LogoTb" />
           <span class="logo-text">Threat<span>Buddy</span></span>
         </a>
 
@@ -22,7 +22,7 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="pages/LibraryPage/index.php">Library</a></li>
           <li><a href="pages/ArticlePage/index.php">Articles</a></li>
-          <!-- <li><a href="pages/Resources.php">Resources ▾</a></li> -->
+          <li><a href="pages/Admin/index.php" class="nav-link">Resources ▾</a></li>
           <li><a href="pages/About/index.html">About</a></li>
         </ul>
       </div>
