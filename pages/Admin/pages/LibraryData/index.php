@@ -126,10 +126,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
                             <select name="category" required>
                                 <option value="" selected disabled>Select category</option>
+                                <option>Web Application Attack</option>
+                                <option>Network Attack</option>
                                 <option>Malware</option>
-                                <option>Phishing</option>
-                                <option>Network Threats</option>
-                                <option>System Vulnerabilities</option>
+                                <option>Credential Attack</option>
                                 <option>Other</option>
                             </select>
 
@@ -366,10 +366,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
                         id="edit_category"
                         required>
 
+                        <option>Web Application Attack</option>
+                        <option>Network Attack</option>
                         <option>Malware</option>
-                        <option>Phishing</option>
-                        <option>Network Threats</option>
-                        <option>System Vulnerabilities</option>
+                        <option>Credential Attack</option>
                         <option>Other</option>
 
                     </select>
