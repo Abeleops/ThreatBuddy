@@ -63,6 +63,7 @@
           <option value="Malware">Malware</option>
           <option value="Network Attack">Network Attack</option>
           <option value="Exploit">Exploit</option>
+          <option value="Phishing">Phishing</option>
         </select>
         <select id="severityFilter" class="filter-select">
           <option value="">All Severity Levels</option>
