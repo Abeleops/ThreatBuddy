@@ -24,7 +24,7 @@
           <li ><a href="#" class="active">Library</a></li>
           <li><a href="../ArticlePage/index.php">Articles</a></li>
           <!-- <li><a href="pages/Resources.php">Resources ▾</a></li> -->
-          <li><a href="../About/index.html">About</a></li>
+          <li><a href="../About/index.php">About</a></li>
         </ul>
       </div>
 
