@@ -43,7 +43,7 @@
       <span class="hero-underline"></span>
     </div>
     <div class="hero-art">
-      <img src="assets/img/hero-library.png" alt="Cyber threat illustration" />
+      <img src="/pages/LibraryPage/assets/img/hero-library.png" alt="Cyber threat illustration" />
     </div>
   </section>
 
