@@ -23,7 +23,7 @@
           <li><a href="pages/LibraryPage/index.php">Library</a></li>
           <li><a href="pages/ArticlePage/index.php">Articles</a></li>
           <!-- <li><a href="pages/Admin/index.php" class="nav-link">Resources ▾</a></li> -->
-          <li><a href="pages/About/index.html">About</a></li>
+          <li><a href="pages/About/index.php">About</a></li>
         </ul>
       </div>
 
