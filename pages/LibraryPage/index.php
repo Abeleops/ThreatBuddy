@@ -12,24 +12,49 @@
 
   <!-- ───────── NAVBAR ───────── -->
   <nav class="navbar">
-    <div class="nav-inner">
-      <a class="nav-brand" href="../../index.php">
-        <img src="../../assets/img/LogoTB.png" alt="ThreatBuddy logo" class="nav-logo" />
-        <span class="brand-threat">Threat</span><span class="brand-buddy">Buddy</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="../LibraryPage/index.php" class="nav-link active">Library</a></li>
-        <li><a href="../ArticlePage/index.php" class="nav-link">TMedia</a></li>
-        <li><a href="../Admin/index.php" class="nav-link">Resources ▾</a></li>
-        <li><a href="../About/index.html" class="nav-link">About</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a href="../SignIn/index.php" class="btn-outline">Sign In</a>
-        <a href="../SignUp/index.php" class="btn-solid">Get Started</a>
-        <button class="btn-theme" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <div class="leftSide">
+        <!-- Logo -->
+        <a href="../../index.php" class="logo">
+          <img src="assets/img/LogoTB.png" alt="" id="LogoTb" />
+          <span class="logo-text">Threat<span>Buddy</span></span>
+        </a>
+
+        <!-- Nav Links -->
+        <ul class="nav-links" id="navLinks">
+          <li ><a href="#" class="active">Library</a></li>
+          <li><a href="../ArticlePage/index.php">Articles</a></li>
+          <!-- <li><a href="pages/Resources.php">Resources ▾</a></li> -->
+          <li><a href="../About/index.html">About</a></li>
+        </ul>
       </div>
-    </div>
-  </nav>
+
+      <!-- Actions -->
+      <div class="righSide">
+        <div class="nav-actions">
+          <button
+            onclick="location.href = 'pages/SignIn/index.php'"
+            class="btn-signin"
+          >
+            Sign In
+          </button>
+          <button
+            onclick="location.href = 'pages/SignUp/index.php'"
+            class="btn-get-started"
+          >
+            Get Started
+          </button>
+          <button
+            class="btn-theme"
+            id="themeToggle"
+            aria-label="Toggle dark mode"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
 
   <!-- ───────── HERO ───────── -->
   <section class="lib-hero">
@@ -43,7 +68,7 @@
       <span class="hero-underline"></span>
     </div>
     <div class="hero-art">
-      <img src="/pages/LibraryPage/assets/img/hero-library.png" alt="Cyber threat illustration" />
+      <img src="assets/img/hero-library.png" alt="Cyber threat illustration" />
     </div>
   </section>
 
@@ -59,15 +84,15 @@
         </div>
         <select id="categoryFilter" class="filter-select">
           <option value="">All Categories</option>
-          <option value="Social Engineering">Social Engineering</option>
-          <option value="Malware">Malware</option>
+          <option value="Web Application Attack">Web Application Attack</option>
           <option value="Network Attack">Network Attack</option>
-          <option value="Exploit">Exploit</option>
-          <option value="Phishing">Phishing</option>
+          <option value="Malware">Malware</option>
+          <option value="Credential Attack">Credential Attack</option>
+          <option value="Other">Other</option>
         </select>
         <select id="severityFilter" class="filter-select">
           <option value="">All Severity Levels</option>
-          <option value="Critical">Critical</option>
+          <!-- <option value="Critical">Critical</option> -->
           <option value="High">High</option>
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
@@ -148,7 +173,7 @@
     </div>
 
     <div class="footer-bottom">
-      <img src="../../assets/img/seal.png" alt="" class="footer-seal" />
+      <!-- <img src="../../assets/img/seal.png" alt="" class="footer-seal" /> -->
       <p>© 2026 ThreatBuddy. All rights reserved</p>
     </div>
   </footer>
@@ -180,7 +205,12 @@
           threatCard.innerHTML = `
             <button class="threat-header" aria-expanded="false">
               <div class="threat-icon-wrap">
-                <img src="${threat.icon_url || '../../assets/img/lock.png'}" alt="" class="threat-icon" />
+                <img
+                    src="../admin/pages/LibraryData/uploads/${threat.image}"
+                    alt="${threat.name}"
+                    class="threat-icon"
+                    onerror="this.src='../../assets/img/lock.png';"
+                />
               </div>
               <span class="threat-name">${threat.name}</span>
               <span class="toggle-btn">+</span>
@@ -200,11 +230,15 @@
                 <p><strong>About:</strong> ${threat.about}</p>
                 ${howItWorks ? `
                   <p><strong>How it Works:</strong></p>
-                  <ol>${howItWorks}</ol>
+                  <ol style="margin-left: 25px; padding-left: 20px;">
+                    ${howItWorks}
+                  </ol>
                 ` : ''}
                 ${preventionTips ? `
-                  <p><strong>Prevention Tips:</strong></p>
-                  <ol>${preventionTips}</ol>
+                <p><strong>Prevention Tips:</strong></p>
+                  <ol style="margin-left: 25px; padding-left: 20px;">
+                    ${preventionTips}
+                  </ol>
                 ` : ''}
               </div>
             </div>
