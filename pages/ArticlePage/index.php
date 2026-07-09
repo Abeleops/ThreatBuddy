@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     include "includes/db.php";
 
     /* ==========================
@@ -169,9 +171,21 @@
                 <i class="fa-solid fa-ellipsis"></i>
             </a>
 
-            <a href="#" class="signin-btn">
-                Sign In
-            </a>
+            <?php if (isset($_SESSION['user_id'])) { ?>
+
+                <a href="includes/logout.php" class="signin-btn">
+                    Log Out
+                </a>
+
+            <?php } else { ?>
+
+                <a href="../SignIn/index.php" class="signin-btn">
+                    Sign In
+                </a>
+
+            <?php } ?>
+
+        </div>
 
             <!-- <button class="dark-btn">
                 <i class="fa-solid fa-moon"></i>
@@ -193,15 +207,40 @@
 
                         <img src="assets/img/default_image.png" alt="">
 
-                        <h4>Welcome to ThreatBuddy!</h4>
+                        <?php if (isset($_SESSION['user_id'])) { ?>
 
-                        <p>Sign in to access your personalized cybersecurity profile</p>
+                            <h4>
+                                <?php echo htmlspecialchars($_SESSION['first_name']); ?>
+                                <?php echo htmlspecialchars($_SESSION['last_name']); ?>
+                            </h4>
+
+                            <p>
+                                <?php echo htmlspecialchars($_SESSION['email']); ?>
+                            </p>
+
+                        <?php } else { ?>
+
+                            <h4>Welcome to ThreatBuddy!</h4>
+
+                            <p>
+                                Sign in to access your personalized cybersecurity profile
+                            </p>
+
+                        <?php } ?>
 
                     </div>
 
-                    <a href="#" class="login-btn">Log In</a>
+                    <?php if (!isset($_SESSION['user_id'])) { ?>
 
-                    <a href="#" class="create-btn">Create Account</a>
+                        <a href="../SignIn/index.php" class="login-btn">
+                            Log In
+                        </a>
+
+                        <a href="../SignUp/index.php" class="create-btn">
+                            Create Account
+                        </a>
+
+                    <?php } ?>
 
                 </div>
 
